@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Sohaib&#39;s Blog</title>
-    <link>https://sohaib03.github.io/blog/posts/</link>
-    <description>Recent content in Posts on Sohaib&#39;s Blog</description>
+    <title>Algorithms on Sohaib&#39;s Blog</title>
+    <link>https://sohaib03.github.io/blog/tags/algorithms/</link>
+    <description>Recent content in Algorithms on Sohaib&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Athul</copyright>
     <lastBuildDate>Wed, 08 Jan 2025 02:15:00 +0600</lastBuildDate>
-    <atom:link href="https://sohaib03.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sohaib03.github.io/blog/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Set Hash</title>
       <link>https://sohaib03.github.io/blog/posts/sethash/</link>

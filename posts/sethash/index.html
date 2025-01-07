@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html><head lang="en">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Set Hash - Sohaib&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Explore the concept of set hashing to efficiently compare sets and handle multiple equality queries in constant time" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="https://sohaib03.github.io/blog/posts/sethash/">
+  <meta property="og:site_name" content="Sohaib&#39;s Blog">
+  <meta property="og:title" content="Set Hash">
+  <meta property="og:description" content="Explore the concept of set hashing to efficiently compare sets and handle multiple equality queries in constant time">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-08T02:15:00+06:00">
+    <meta property="article:modified_time" content="2025-01-08T02:15:00+06:00">
+    <meta property="article:tag" content="Algorithms">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Set Hash">
+  <meta name="twitter:description" content="Explore the concept of set hashing to efficiently compare sets and handle multiple equality queries in constant time">
+<script src="https://sohaib03.github.io/blog/js/feather.min.js"></script>
+	
+	
+        <link href="https://sohaib03.github.io/blog/css/fonts.11a1877508139eac0b5b4852ceb110c35641b3533321e66e39149e901ed5756b.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://sohaib03.github.io/blog/css/main.decd50501df9a39195b7930ddc4bf70354c993c0cd9fabe53416fabdac56f712.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://sohaib03.github.io/blog/css/dark.616a353e4092ed0c5e91a96e6494d2dbd3fe7084eed336424bd7b818e26cc597.css" media="(prefers-color-scheme: dark)"  />
+	
+
+	
+	
+		<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+
+		
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+	
+
+	
+	
+
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://sohaib03.github.io/">Sohaib&#39;s Blog</a>
+	</div>
+	<nav>
+		
+		<a href="/blog/">Home</a>
+		
+		<a href="/blog/posts">All posts</a>
+		
+		<a href="/blog/about">About</a>
+		
+		<a href="/blog/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Set Hash</h1>
+			<div class="meta">Posted on Jan 8, 2025</div>
+		</div>
+		
+
+		
+
+		<section class="body">
+			<h2 id="problem-description">Problem Description</h2>
+<h3 id="input">Input:</h3>
+<ul>
+<li>An integer <strong>K</strong> representing the number of sets.</li>
+<li>An integer <strong>M</strong> representing the number of items in each set.</li>
+<li>A list of <strong>K sets</strong>, where each set contains <strong>M integers</strong>.</li>
+<li>An integer <strong>Q</strong> representing the number of queries.</li>
+<li>A list of <strong>Q queries</strong>, where each query is of the form <code>(i, j)</code> asking whether the <strong>i-th</strong> set is equal to the <strong>j-th</strong> set.</li>
+</ul>
+<h3 id="output">Output:</h3>
+<ul>
+<li>For each query, return <code>True</code> if the two sets are equal, otherwise return <code>False</code>.</li>
+</ul>
+<h3 id="constraints">Constraints:</h3>
+<ul>
+<li>\( 1 \leq K \leq 10^4 \)</li>
+<li>\( 1 \leq M \leq 10^3 \)</li>
+<li>\( 1 \leq Q \leq 10^4 \)</li>
+<li>Elements of each set are integers within the range \( 1 \leq \text{element} \leq 10^6 \).</li>
+</ul>
+<hr>
+<h2 id="brute-force-solution">Brute-Force Solution</h2>
+<p>The brute-force solution involves directly comparing two sets for each query. This can be done using Python&rsquo;s set equality operator.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Input</span>
+</span></span><span style="display:flex;"><span>K <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>  <span style="color:#75715e"># Number of sets</span>
+</span></span><span style="display:flex;"><span>M <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>  <span style="color:#75715e"># Number of items per set</span>
+</span></span><span style="display:flex;"><span>sets <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>}
+</span></span><span style="display:flex;"><span>]  <span style="color:#75715e"># List of sets</span>
+</span></span><span style="display:flex;"><span>Q <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>  <span style="color:#75715e"># Number of queries</span>
+</span></span><span style="display:flex;"><span>queries <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>),  <span style="color:#75715e"># Compare set 0 with set 1</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>),  <span style="color:#75715e"># Compare set 0 with set 3</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>)   <span style="color:#75715e"># Compare set 2 with set 4</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Brute-force solution</span>
+</span></span><span style="display:flex;"><span>results <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, j <span style="color:#f92672">in</span> queries:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Compare sets[i] and sets[j] directly</span>
+</span></span><span style="display:flex;"><span>    results<span style="color:#f92672">.</span>append(sets[i] <span style="color:#f92672">==</span> sets[j])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output results for each query</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> query, result <span style="color:#f92672">in</span> zip(queries, results):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Query </span><span style="color:#e6db74">{</span>query<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>result<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="explanation">Explanation:</h3>
+<ol>
+<li><strong>Input Parsing:</strong>
+<ul>
+<li>The input includes \( K \) sets and \( Q \) queries.</li>
+</ul>
+</li>
+<li><strong>Direct Comparison:</strong>
+<ul>
+<li>For each query <code>(i, j)</code>, use the equality operator (<code>==</code>) to check if <code>sets[i]</code> is equal to <code>sets[j]</code>.</li>
+</ul>
+</li>
+<li><strong>Output Results:</strong>
+<ul>
+<li>Store the result (<code>True</code> or <code>False</code>) for each query and print them.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">Complexity Analysis:</h3>
+<ul>
+<li><strong>Set Comparison:</strong> Comparing two sets of size \( M \) takes \( O(M) \).</li>
+<li><strong>Overall Complexity:</strong> For \( Q \) queries, the time complexity is: \( O(Q \times M) \)</li>
+<li>This can become inefficient for large \( Q \) and \( M \), motivating the need for an optimized solution using hashing.</li>
+</ul>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li> <a href="/blog/tags/algorithms">Algorithms</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+		</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/sohaib03/" rel="me" title="GitHub"><i data-feather="github"></i></a>
+    <a class="border"></a><a class="soc" href="https://www.linkedin.com/in/sohaib-bm/" rel="me" title="LinkedIn"><i data-feather="linkedin"></i></a>
+    <a class="border"></a><a class="soc" href="https://gitlab.com/athul/" rel="me" title="GitLab"><i data-feather="gitlab"></i></a>
+    <a class="border"></a></div>
+  <div class="footer-info">
+    2025  © Athul |  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+
+<script>
+  feather.replace()
+</script></div>
+    </body>
+</html>

@@ -1,40 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Archie</title>
+    <title>Tags on Sohaib&#39;s Blog</title>
     <link>https://sohaib03.github.io/blog/tags/</link>
-    <description>Recent content in Tags on Archie</description>
+    <description>Recent content in Tags on Sohaib&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Athul</copyright>
-    <lastBuildDate>Wed, 01 Apr 2020 02:01:58 +0530</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jan 2025 02:15:00 +0600</lastBuildDate>
     <atom:link href="https://sohaib03.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Primer</title>
-      <link>https://sohaib03.github.io/blog/tags/primer/</link>
-      <pubDate>Wed, 01 Apr 2020 02:01:58 +0530</pubDate>
-      <guid>https://sohaib03.github.io/blog/tags/primer/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Todo</title>
-      <link>https://sohaib03.github.io/blog/tags/todo/</link>
-      <pubDate>Wed, 01 Apr 2020 02:01:58 +0530</pubDate>
-      <guid>https://sohaib03.github.io/blog/tags/todo/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Procrastinating</title>
-      <link>https://sohaib03.github.io/blog/tags/procrastinating/</link>
-      <pubDate>Sun, 18 Mar 2018 12:13:32 +0530</pubDate>
-      <guid>https://sohaib03.github.io/blog/tags/procrastinating/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Space</title>
-      <link>https://sohaib03.github.io/blog/tags/space/</link>
-      <pubDate>Sun, 18 Mar 2018 12:13:30 +0530</pubDate>
-      <guid>https://sohaib03.github.io/blog/tags/space/</guid>
+      <title>Algorithms</title>
+      <link>https://sohaib03.github.io/blog/tags/algorithms/</link>
+      <pubDate>Wed, 08 Jan 2025 02:15:00 +0600</pubDate>
+      <guid>https://sohaib03.github.io/blog/tags/algorithms/</guid>
       <description></description>
     </item>
   </channel>
